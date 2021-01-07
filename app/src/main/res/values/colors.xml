@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#7267ef</color>
+    <color name="colorPrimaryDark">#7267ef</color>
+    <color name="colorAccent">#7267ef</color>
+    <color name="red">#f20000</color>
+    <color name="dashbord_box">#09a3c7</color>
+    <color name="green">#009688</color>
+    <color name="black">#000000</color>
+    <color name="white">#fff</color>
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorTextPrimary">#FFFFFF</color>
+    <color name="tab_disable">#77979797</color>
+    <color name="tab_enable">#FFFFFF</color>
+    <color name="tab_checked">#fff</color>
+    <color name="tab_unchecked">#6bffffff</color>
+    <color name="textcolor">#7267ef</color>
+    <color name="boxcolor">#7267ef</color>
+    <color name="faqtextcolor">#F79C65</color>
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#dedede</color>
+    <color name="dot_dark_screen2">#dedede</color>
+    <color name="dot_dark_screen3">#dedede</color>
+    <color name="dot_dark_screen4">#dedede</color>
+
+    <!-- dots active colors -->
+    <color name="color1">#F9477B</color>
+    <color name="bg">#5256db</color>
+    <array name="array_dot_active">
+        <item>@color/bg</item>
+        <item>@color/bg</item>
+        <item>@color/bg</item>
+        <item>@color/bg</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+        <item>@color/dot_dark_screen4</item>
+    </array>
+    <color name="pie1">#9CF9477B</color>
+    <color name="pie2">#BA64DD17</color>
+
+</resources>

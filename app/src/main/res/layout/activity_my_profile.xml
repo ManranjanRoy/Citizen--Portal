@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MyProfileActivity">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+
+                                <TextView
+                                    android:id="@+id/headname"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:text="Manoranjan Roy"
+                                    android:textColor="@color/white"
+                                    android:textStyle="bold"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:id="@+id/heademail"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="0dp"
+                                    android:text="Manoranjan@ventruxinformatics.com"
+                                    android:textColor="@color/white"
+                                    android:visibility="gone" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:background="@drawable/radiusinput_field"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="30dp"
+                            android:paddingRight="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/editname"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="20dp"
+                                    android:backgroundTint="@color/white"
+                                    android:inputType="text"
+                                    android:padding="2dp"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/text_size"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:id="@+id/textname"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="20dp"
+                                    android:backgroundTint="@color/white"
+                                    android:inputType="text"
+                                    android:padding="2dp"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/text_size"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="2dp"
+                                    android:text="Name"
+                                    android:textColor="@color/black" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentEnd="true"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:id="@+id/beditname"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/edit_icon" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:background="@drawable/radiusinput_field"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="30dp"
+                            android:paddingRight="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/editlname"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="20dp"
+                                    android:backgroundTint="@color/white"
+                                    android:inputType="text"
+                                    android:padding="2dp"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/text_size"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:id="@+id/textlname"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="20dp"
+                                    android:backgroundTint="@color/white"
+                                    android:inputType="text"
+                                    android:padding="2dp"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/text_size"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="2dp"
+                                    android:text="User Type"
+                                    android:textColor="@color/black" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentEnd="true"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:id="@+id/beditlname"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/edit_icon" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:background="@drawable/radiusinput_field"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="30dp"
+                            android:paddingRight="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/editphonenumber"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="20dp"
+                                    android:backgroundTint="@color/white"
+                                    android:inputType="text"
+                                    android:padding="2dp"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/text_size"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:id="@+id/textphonenumber"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="20dp"
+                                    android:backgroundTint="@color/white"
+                                    android:inputType="text"
+                                    android:padding="2dp"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/text_size"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="2dp"
+                                    android:text="Phone Number"
+                                    android:textColor="@color/black" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentEnd="true"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:id="@+id/beditphonenumber"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/edit_icon" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:background="@drawable/radiusinput_field"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="30dp"
+                            android:paddingRight="20dp"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/editcardnumber"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="20dp"
+                                    android:backgroundTint="@color/white"
+                                    android:inputType="text"
+                                    android:padding="2dp"
+                                    android:text="Manoranjan Roy"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/text_size"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:id="@+id/textcardnumber"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="20dp"
+                                    android:backgroundTint="@color/white"
+                                    android:inputType="text"
+                                    android:padding="2dp"
+                                    android:text="Manoranjan Roy"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/text_size"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="2dp"
+                                    android:text="Company Name"
+                                    android:textColor="@color/black" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentEnd="true"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:id="@+id/beditcardnumber"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/edit_icon" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:background="@drawable/radiusinput_field"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="30dp"
+                            android:paddingRight="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/editemail"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="20dp"
+                                    android:backgroundTint="@color/white"
+                                    android:inputType="text"
+                                    android:padding="2dp"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/text_size"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:id="@+id/textemail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="20dp"
+                                    android:backgroundTint="@color/white"
+                                    android:inputType="text"
+                                    android:padding="2dp"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/text_size"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="2dp"
+                                    android:text="Email "
+                                    android:textColor="@color/black" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentEnd="true"
+                                android:gravity="center_vertical"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:id="@+id/beditemail"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/edit_icon" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:background="@drawable/radiusinput_field"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="30dp"
+                            android:paddingRight="20dp"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/editaddress"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="20dp"
+                                    android:backgroundTint="@color/white"
+                                    android:inputType="text"
+                                    android:padding="2dp"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/text_size"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:id="@+id/textaddress"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="20dp"
+                                    android:backgroundTint="@color/white"
+                                    android:inputType="text"
+                                    android:padding="2dp"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/text_size"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="2dp"
+                                    android:text="Address "
+                                    android:textColor="@color/black" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentEnd="true"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:id="@+id/beditaddress"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/edit_icon" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:background="@drawable/radiusinput_field"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="30dp"
+                            android:paddingRight="20dp"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/editpincode"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="20dp"
+                                    android:backgroundTint="@color/white"
+                                    android:inputType="text"
+                                    android:padding="2dp"
+                                    android:text="Manoranjan Roy"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/text_size"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:id="@+id/textpincode"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="20dp"
+                                    android:backgroundTint="@color/white"
+                                    android:inputType="text"
+                                    android:padding="2dp"
+                                    android:text="p-111 block j new Alipore Kolkata"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/text_size"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="2dp"
+                                    android:text="Pincode "
+                                    android:textColor="@color/black" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentEnd="true"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:id="@+id/beditpincode"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/edit_icon" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</RelativeLayout>

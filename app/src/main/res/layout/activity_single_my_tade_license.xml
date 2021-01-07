@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.SingleMyTadeLicenseActivity">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:paddingVertical="5dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:paddingLeft="20dp"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:text="Property Owner Details"
+               android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingVertical="5dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Assessee / Holding No :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/sholdingno"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View
+                android:visibility="gone"
+                android:layout_marginTop="3dp"
+                android:background="@color/dot_dark_screen1"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Owner Name :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/sownername"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Street :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/sstreetname"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Locality Name :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/slocalityname"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Ward No. :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/swardno"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="type Of Tax :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/stypeoftax"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Property Tax :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/spropertytax"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Status :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/sstatus"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Type of Land :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/sland"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Issue Date:"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/sissuedate"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginVertical="10dp"
+            android:paddingVertical="5dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:paddingLeft="20dp"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:text="Trade Details"
+               android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingVertical="5dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Type of Business :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/stypeofbusiness"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="For The Year :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/sfortheyear"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="165dp"
+                    android:layout_height="match_parent"
+                    android:text="Name Of Company :"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+                <TextView
+                    android:id="@+id/snameofcompany"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Applied Date :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/sapplieddate"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Investment of Capital :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/sinvestmentofcapital"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text=" "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="GST :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/sgst"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="PAN :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/span"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Contact :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/scontact"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Contact Address :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/sconatctaddress"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Workshop :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/sworkshop"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Godown :"
+                    android:textAlignment="textEnd"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/sgodown"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:background="#EEE"
+            android:id="@+id/rlayout"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableLayout
+                    android:layout_marginBottom="5dp"
+                    android:weightSum="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TableRow>
+                        <TextView
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:text=" Trade Size "
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:text="Nature Of Trade "
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:layout_width="125dp"
+                            android:layout_height="wrap_content"
+                            />
+                        <TextView
+                            android:visibility="gone"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:text="Action"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content" />
+                    </TableRow>
+                </TableLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimary"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/tradelist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View
+                android:visibility="gone"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimary"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginVertical="10dp"
+            android:paddingVertical="5dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:paddingLeft="20dp"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:text="Documents"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="5dp"
+            android:id="@+id/documentlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <LinearLayout
+        android:id="@+id/progresslayout"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.github.ybq.android.spinkit.SpinKitView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.Large.Circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:SpinKit_Color="@color/colorAccent" />
+    </LinearLayout>
+</RelativeLayout>

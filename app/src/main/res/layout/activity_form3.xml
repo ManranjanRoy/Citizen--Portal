@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".Activity.Form3Activity">
+    <RelativeLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/back"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:layout_width="50dp"
+                android:layout_height="30dp"/>
+        </LinearLayout>
+        <TextView
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:text="Step 3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:paddingVertical="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/roundedcorner"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/spinnerbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Spinner
+                        android:textAlignment="center"
+                        android:id="@+id/cardspinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
+                <!--Spinner widget-->
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textcompany"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:errorEnabled="true"
+                    app:hintEnabled="true">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cardnumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusedByDefault="true"
+                        android:hint="ID Proof Number"
+                        android:textSize="14dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:textSize="16dp"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Upload Image"/>
+                    <ImageView
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/aadharfront"
+                        app:srcCompat="@drawable/ic_baseline_cloud_upload_24"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        tools:ignore="VectorDrawableCompat" />
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:paddingHorizontal="10dp"
+                        android:visibility="visible"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/button_corner"
+                        android:id="@+id/btn_skip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:text="Previous"
+                        android:layout_toLeftOf="@id/btn_next"
+                        android:textColor="@color/white" />
+                    <Button
+                        android:paddingHorizontal="10dp"
+                        android:background="@drawable/button_corner"
+                        android:id="@+id/btn_next"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:text="Next"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
+       <item
+            android:id="@+id/nav_trade"
+            android:icon="@drawable/trade"
+            android:title="Trade Enlishment" />
+          <item
+
+              android:id="@+id/nav_pendingpayment"
+              android:icon="@drawable/ic_payment_black_24dp"
+              android:title="Pending Payment (Form)" />
+          <item
+               android:id="@+id/nav_my_trade_license"
+               android:icon="@drawable/ic_payment_black_24dp"
+               android:title="My Trade License" />
+        <!--   <item
+
+             android:id="@+id/nav_cart"
+             android:icon="@drawable/logo_haldia"
+             android:title="My Cart" />
+         <item
+
+             android:id="@+id/nav_wallet"
+             android:icon="@drawable/logo_haldia"
+             android:title="My Wallet" />
+         <item
+             android:id="@+id/nav_catagory"
+             android:icon="@android:drawable/ic_dialog_dialer"
+             android:title="Shop By Category " />-->
+
+    </group>
+    <item android:title="Communicate">
+        <menu>
+           <!-- <item
+                
+                android:id="@+id/nav_aboutus"
+                android:icon="@android:drawable/ic_dialog_info"
+                android:title="About Us" />
+            <item
+                android:id="@+id/nav_privacy"
+                android:icon="@android:drawable/ic_lock_idle_low_battery"
+                android:title="Privacy &amp; Policy" />
+            <item
+                
+                android:id="@+id/nav_terms"
+                android:icon="@android:drawable/ic_menu_manage"
+                android:title="Term &amp; Conditions" />
+            <item
+                
+                android:id="@+id/nav_faqs"
+                android:icon="@android:drawable/ic_menu_help"
+                android:title="FAQ?" />-->
+            <item
+                
+                android:id="@+id/nav_logout"
+                android:icon="@android:drawable/ic_menu_revert"
+                android:title="Logout" />
+        </menu>
+    </item>
+</menu>

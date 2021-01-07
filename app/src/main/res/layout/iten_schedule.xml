@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TableLayout
+        android:gravity="center_vertical"
+        android:weightSum="3"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <TableRow>
+            <TextView
+                android:textAlignment="center"
+                android:id="@+id/textdate"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text=" Date "
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:textAlignment="center"
+                android:id="@+id/texttime"
+                android:textColor="@color/black"
+                android:text=" 05: 00 PM to 07:00 PM "
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:textAlignment="center"
+                android:id="@+id/delete"
+               android:src="@drawable/ic_delete_black_24dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

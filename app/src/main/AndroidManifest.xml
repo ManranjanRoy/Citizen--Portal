@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.manoranjan.citizenportal">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo_haldia"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@drawable/logo_haldia"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Activity.NotificationActivity" android:label="Notifications"
+            android:parentActivityName=".Activity.MainActivity"></activity>
+        <activity
+            android:name=".Activity.FollowUpGraphActivity"
+            android:label="FollowUp Status"
+            android:parentActivityName=".Activity.SingleMyTadeLicenseActivity" />
+        <activity
+            android:name=".Activity.SingleMyTadeLicenseActivity"
+            android:label="Form Details"
+            android:parentActivityName=".Activity.MyTradeLicenseActivity" />
+        <activity
+            android:name=".Activity.MyTradeLicenseActivity"
+            android:label="My Trade License"
+            android:parentActivityName=".Activity.MainActivity" />
+        <activity
+            android:name=".Activity.PendingpaymentActivity"
+            android:label="Pending Payments"
+            android:parentActivityName=".Activity.MainActivity" />
+        <activity
+            android:name=".Activity.InsertTLFInalPageActivity"
+            android:label="Reciept"
+            android:parentActivityName=".Activity.MainActivity" />
+        <activity android:name=".Activity.NatureofTradeActivity" />
+        <activity
+            android:name=".Activity.TradeForm4ctivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.TradeForm3ctivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.TradeForm2Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.TradeForm1Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.Form4Activity"
+            android:label="Review &amp; Submit"
+            android:parentActivityName=".Activity.Form3Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.Form3Activity"
+            android:label="Step 3"
+            android:parentActivityName=".Activity.Form2Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.Form2Activity"
+            android:label="Step 2"
+            android:parentActivityName=".Activity.Form1Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.Form1Activity"
+            android:label="Step 1"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.PrifileDetaiilsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.MyProfileActivity"
+            android:label="My Profile"
+            android:parentActivityName=".Activity.MainActivity" />
+        <activity
+            android:name=".Activity.Login"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.SignUpActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.SplashScreen"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_BOZdKdWNHZRUkb" />
+    </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+</manifest>
