@@ -13,6 +13,9 @@ public class InsertTLResponse {
     @SerializedName("paymentdate")
     @Expose
     private String paymentdate;
+    @SerializedName("Column1")
+    @Expose
+    private String column1;
     @SerializedName("ReceivedFrom")
     @Expose
     private String receivedFrom;
@@ -51,6 +54,14 @@ public class InsertTLResponse {
 
     public void setPaymentdate(String paymentdate) {
         this.paymentdate = paymentdate;
+    }
+
+    public String getColumn1() {
+        return column1;
+    }
+
+    public void setColumn1(String column1) {
+        this.column1 = column1;
     }
 
     public String getReceivedFrom() {

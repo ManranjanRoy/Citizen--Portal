@@ -72,6 +72,7 @@ public class TradeForm2Activity extends AppCompatActivity {
     LinearLayout rlayoutforowner;
 
     Pattern patternforpan,patternforgst;
+     AutoCompleteTextView actv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +113,7 @@ public class TradeForm2Activity extends AppCompatActivity {
         contactaddress = findViewById(R.id.contactaddress);
         workshopaddress = findViewById(R.id.workshopaddress);
         godownaddress = findViewById(R.id.godownaddress);
+        actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
 
         gettypeofbusiness();
         getfortheyear();
@@ -128,18 +130,27 @@ public class TradeForm2Activity extends AppCompatActivity {
         ownerrecycler.setHasFixedSize(true);
         ownerrecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        schedulelistAdaptor = new natureofTradeAdaptor(getApplicationContext(), tradeNatureModelList);
-        tradetyperecycle.setAdapter(schedulelistAdaptor);
+
+        if(StaticData.tapplytype.equals("Renew")){
+            actv.setEnabled(false);
+            schedulelistAdaptor = new natureofTradeAdaptor(getApplicationContext(), StaticData.tradeNatureModels);
+            tradetyperecycle.setAdapter(schedulelistAdaptor);
+        }else{
+            actv.setEnabled(true);
+            schedulelistAdaptor = new natureofTradeAdaptor(getApplicationContext(), tradeNatureModelList);
+            tradetyperecycle.setAdapter(schedulelistAdaptor);
+        }
         schedulelistAdaptor.setonItemClickListner(new natureofTradeAdaptor.OnitemClickListner() {
             @Override
             public void onDeleteClick(int position) {
-                // Toast.makeText(TradeForm2Activity.this, "p"+position+tradeNatureModelList.size(), Toast.LENGTH_SHORT).show();
-                if (tradeNatureModelList.size() <= 1) {
-                    tradeNatureModelList.clear();
-                } else {
-                    tradeNatureModelList.remove(position);
+                if (StaticData.tapplytype.equals("New")) {
+                    if (tradeNatureModelList.size() <= 1) {
+                        tradeNatureModelList.clear();
+                    } else {
+                        tradeNatureModelList.remove(position);
+                    }
+                    schedulelistAdaptor.notifyDataSetChanged();
                 }
-                schedulelistAdaptor.notifyDataSetChanged();
             }
         });
 
@@ -167,15 +178,29 @@ public class TradeForm2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (validatefiledforbottmform()) {
+                    boolean a = true;
                     final String noofdirector1 = noofdirector.getText().toString().trim();
-                    final String nameofdirector1 = nameofdirector.getText().toString().trim();
-                    final String fathersname1 = fathersname.getText().toString().trim();
-                    final String address1 = address.getText().toString().trim();
-                    final String contactno1 = contactno.getText().toString().trim();
-                    final String idproofno1 = idproofno.getText().toString().trim();
-                    typeofBusinessListModelList.add(new TypeofBusinessListModel(noofdirector1, nameofdirector1, fathersname1, address1, contactno1, "Pan Card", idproofno1));
-                    Toast.makeText(TradeForm2Activity.this, "Added", Toast.LENGTH_SHORT).show();
-                    ownerofTradeAdaptor.notifyDataSetChanged();
+                    if (typeofBusinessListModelList.size()<Integer.parseInt(noofdirector1)) {
+                        final String nameofdirector1 = nameofdirector.getText().toString().trim();
+                        final String fathersname1 = fathersname.getText().toString().trim();
+                        final String address1 = address.getText().toString().trim();
+                        final String contactno1 = contactno.getText().toString().trim();
+                        final String idproofno1 = idproofno.getText().toString().trim();
+                        for (int i = 0; i < typeofBusinessListModelList.size(); i++) {
+                            String pan = typeofBusinessListModelList.get(i).getIdproofno();
+                            if (pan.equals(idproofno1)) {
+                                a = false;
+                                idproofno.setError("Pan No already added");
+                                break;
+                            }
+                        }
+                        if (a) {
+                            typeofBusinessListModelList.add(new TypeofBusinessListModel(noofdirector1, nameofdirector1, fathersname1, address1, contactno1, "Pan Card", idproofno1));
+                        }// Toast.makeText(TradeForm2Activity.this, "Added", Toast.LENGTH_SHORT).show();
+                        ownerofTradeAdaptor.notifyDataSetChanged();
+                    }else{
+                        Toast.makeText(TradeForm2Activity.this, "Please Enter "+noofdirector1 +" Partner or Director", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }
@@ -274,6 +299,16 @@ public class TradeForm2Activity extends AppCompatActivity {
                 // startActivity(new Intent(getApplicationContext(),Login.class));
             }
         });
+
+        actv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                tradeNatureModelList.add(new TradeNatureModel("0", actv.getText().toString(), tradetypeid));
+                actv.setText("");
+                schedulelistAdaptor.notifyDataSetChanged();
+                // Toast.makeText(TradeForm2Activity.this, "", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     private void spinnerdata() {
 
@@ -316,6 +351,8 @@ public class TradeForm2Activity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     @Override
@@ -331,8 +368,10 @@ public class TradeForm2Activity extends AppCompatActivity {
         godownaddress.setText(StaticData.tgodownaddress);
         Dateofcommen.setText(StaticData.tdateofcommenence);
         businessid=StaticData.ttypeofbusinessid;
-        tradeNatureModelList.clear();
-        if (StaticData.tradeNatureModels != null && StaticData.tradeNatureModels.size() > 0) {
+
+
+        if (StaticData.tapplytype.equals("New") &&StaticData.tradeNatureModels != null && StaticData.tradeNatureModels.size() > 0) {
+            tradeNatureModelList.clear();
             Log.d("sizeoftrade", String.valueOf(StaticData.tradeNatureModels.size()));
             tradeNatureModelList = StaticData.tradeNatureModels;
             schedulelistAdaptor = new natureofTradeAdaptor(getApplicationContext(), tradeNatureModelList);
@@ -340,8 +379,8 @@ public class TradeForm2Activity extends AppCompatActivity {
             schedulelistAdaptor.setonItemClickListner(new natureofTradeAdaptor.OnitemClickListner() {
                 @Override
                 public void onDeleteClick(int position) {
-                    //Toast.makeText(TradeForm2Activity.this, "p"+position+tradeNatureModelList.size(), Toast.LENGTH_SHORT).show();
-                    if (tradeNatureModelList.size() <= 1) {
+                    Log.d("sizeoftrade", String.valueOf(StaticData.tradeNatureModels.size()));
+                     if (tradeNatureModelList.size() <= 1) {
                         tradeNatureModelList.clear();
                     } else {
                         tradeNatureModelList.remove(position);
@@ -350,6 +389,15 @@ public class TradeForm2Activity extends AppCompatActivity {
                 }
             });
         }
+        if (StaticData.tapplytype.equals("Renew") &&StaticData.tradeNatureModels != null && StaticData.tradeNatureModels.size() > 0) {
+            Log.d("sizeoftraderesume", String.valueOf(StaticData.tradeNatureModels.size()));
+            schedulelistAdaptor = new natureofTradeAdaptor(getApplicationContext(),  StaticData.tradeNatureModels);
+            tradetyperecycle.setAdapter(schedulelistAdaptor);
+            schedulelistAdaptor.notifyDataSetChanged();
+            tradeNatureModelList = StaticData.tradeNatureModels;
+
+        }
+
         typesOfBusinessModelarraylist.clear();
         if (StaticData.typeofBusinessListModelList != null && StaticData.typeofBusinessListModelList.size() > 0) {
             Log.d("sizeoftrade", String.valueOf(StaticData.typeofBusinessListModelList.size()));
@@ -368,8 +416,18 @@ public class TradeForm2Activity extends AppCompatActivity {
                 }
             });
         }
+
         if (businessid.equals("1") || businessid.equals("2")) {
-            if (StaticData.tradeNatureModels!=null &&StaticData.typeofBusinessListModelList.size()>0) {
+            if (StaticData.typeofBusinessListModelList!=null &&StaticData.typeofBusinessListModelList.size()>0) {
+                nameofdirector.setText(StaticData.typeofBusinessListModelList.get(0).getName());
+                fathersname.setText(StaticData.typeofBusinessListModelList.get(0).getFathername());
+                address.setText(StaticData.typeofBusinessListModelList.get(0).getAddress());
+                contactno.setText(StaticData.typeofBusinessListModelList.get(0).getContactno());
+                idproofno.setText(StaticData.typeofBusinessListModelList.get(0).getIdproofno());
+            }
+        }else if(StaticData.tapplytype.equals("Renew") &&(!businessid.equals("1") ||! businessid.equals("2"))){
+            if (StaticData.typeofBusinessListModelList!=null &&StaticData.typeofBusinessListModelList.size()>0) {
+                noofdirector.setText(String.valueOf(StaticData.typeofBusinessListModelList.size()));
                 nameofdirector.setText(StaticData.typeofBusinessListModelList.get(0).getName());
                 fathersname.setText(StaticData.typeofBusinessListModelList.get(0).getFathername());
                 address.setText(StaticData.typeofBusinessListModelList.get(0).getAddress());
@@ -438,6 +496,9 @@ public class TradeForm2Activity extends AppCompatActivity {
                                 Log.d("testmatchtype", StaticData.ttypeofbusinessid + "/" + typesOfBusinessModelarraylist.get(i).getTrade_Nature_Id());
                                 if (StaticData.ttypeofbusinessid.trim().equals(typesOfBusinessModelarraylist.get(i).getTrade_Nature_Id().toString())) {
                                     businesstype.setSelection(i);
+                                    if (StaticData.tapplytype.equals("Renew")){
+                                        onResume();
+                                    }
                                     break;
                                 }
                             }
@@ -560,7 +621,6 @@ public class TradeForm2Activity extends AppCompatActivity {
             nameofdirector.setHint("Name of Proprietor");
             return;
         } else if (businessid.equals("3") || businessid.equals("6")) {
-
             noofdirector.setHint("");
             nameofdirector.setHint("");
             noofdirector.setHint("No of partners");
@@ -607,6 +667,7 @@ public class TradeForm2Activity extends AppCompatActivity {
                                 for (int i = 0; i < fortheYearModelArrayList.size(); i++) {
                                     if (item.equals(fortheYearModelArrayList.get(i).getFin_Year_Name())) {
                                         fortheyearid = String.valueOf(fortheYearModelArrayList.get(i).getFin_Year_ID());
+                                        Dateofcommen.setText("1-4-20"+item.substring(0,2));
                                         break;
                                     }
                                 }
@@ -622,8 +683,12 @@ public class TradeForm2Activity extends AppCompatActivity {
                                 Log.d("testmatchtype", StaticData.tfortheyearid + "/" + fortheYearModelArrayList.get(i).getFin_Year_ID());
                                 if (StaticData.tfortheyearid.trim().equals(fortheYearModelArrayList.get(i).getFin_Year_ID().toString())) {
                                     fortheyearspinner.setSelection(i);
+                                    Dateofcommen.setText("1-4-20"+fortheYearModelArrayList.get(i).getFin_Year_Name().substring(0,2));
                                     break;
                                 }
+                            }
+                            if (StaticData.tapplytype.equals("Renew")){
+                                fortheyearspinner.setSelection(0);
                             }
                         }
                     } else {
@@ -659,20 +724,9 @@ public class TradeForm2Activity extends AppCompatActivity {
 
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                                 (TradeForm2Activity.this, R.layout.my_spinner_style, natureoftrade);
-                        //Getting the instance of AutoCompleteTextView
-                        final AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
                         actv.setThreshold(1);//will start working from first character
                         actv.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
-                        actv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                parent.getSelectedItem();
-                                tradeNatureModelList.add(new TradeNatureModel("0", actv.getText().toString(), tradetypeid));
-                                actv.setText("");
-                                schedulelistAdaptor.notifyDataSetChanged();
-                                // Toast.makeText(TradeForm2Activity.this, "", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+
                     } else {
 
                     }

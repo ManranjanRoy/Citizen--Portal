@@ -117,7 +117,7 @@
                         android:textColor="@color/black"
                         android:drawableRight="@android:drawable/ic_menu_my_calendar"
                         android:gravity="center"
-                        android:hint="Date of Commenencement"
+                        android:hint="Date of Commencement"
                         android:textSize="14dp"
                         android:id="@+id/Dateofcommen"
                         android:layout_width="match_parent"

@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class InsertTLFInalPageActivity extends AppCompatActivity {
 
-    TextView recieprno, recievedfrom, sumofrs, onaccountof, rs, remark, enteredby, applicationno;
+    TextView recieprno, recievedfrom, sumofrs, onaccountof, rs, remark, enteredby, applicationno,date;
     ImageView signature,qrcode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,8 @@ public class InsertTLFInalPageActivity extends AppCompatActivity {
         applicationno = findViewById(R.id.applicationno);
         signature=findViewById(R.id.signature);
         qrcode=findViewById(R.id.qrcode);
+        date=findViewById(R.id.date);
+
         if (StaticData.insertTLResponse != null) {
             recieprno.setText(StaticData.insertTLResponse.getReceiptNo());
             recievedfrom.setText(StaticData.insertTLResponse.getReceivedFrom());
@@ -38,6 +40,7 @@ public class InsertTLFInalPageActivity extends AppCompatActivity {
             remark.setText("Dummy data");
             enteredby.setText(StaticData.insertTLResponse.getReceivedFrom());
             applicationno.setText(StaticData.insertTLResponse.getFormNumber());
+            date.setText(StaticData.insertTLResponse.getPaymentdate());
 
             Picasso.with(getApplicationContext())
                     .load(StaticData.insertTLResponse.getTLFormReceiptSig())

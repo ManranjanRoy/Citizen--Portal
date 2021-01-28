@@ -79,13 +79,31 @@
                         android:id="@+id/formno"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Form No."
                         android:inputType="text"
                         android:textColor="@color/black"
                         android:textSize="14dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <!--Spinner widget-->
+                <TextView
+                    android:layout_marginBottom="3dp"
+                    android:text="Type of relation with land"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/spinnerbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Spinner
+                        android:textAlignment="center"
+                        android:id="@+id/typesofrelation"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/mobilenolayout"
                     android:layout_width="match_parent"
@@ -98,7 +116,7 @@
                         android:id="@+id/holdingno"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Assesse/Holding No."
+                        android:hint="Assesse/Holding No /Stall no"
                         android:inputType="number"
                         android:textColor="@color/black"
                         android:maxLength="10"
@@ -116,7 +134,7 @@
                         android:id="@+id/ownername"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:focusedByDefault="true"
+                        android:textColor="@color/black"
                         android:hint="Owner name"
                         android:textSize="14dp" />
 
@@ -209,6 +227,15 @@
                             android:text="Occupier Tax"
                             android:checked="false"
                             android:textSize="15dp" />
+                        <RadioButton
+                            android:visibility="gone"
+                            android:onClick="radioclick"
+                            android:id="@+id/radionontax"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Tax"
+                            android:checked="false"
+                            android:textSize="15dp" />
                     </RadioGroup>
                 </LinearLayout>
 
@@ -227,25 +254,7 @@
                         android:inputType="number"
                         android:textSize="14dp" />
                 </com.google.android.material.textfield.TextInputLayout>
-                <TextView
-                    android:layout_marginBottom="3dp"
-                    android:text="Type of relation with land"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <LinearLayout
-                    android:layout_marginBottom="15dp"
-                    android:background="@drawable/spinnerbox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <Spinner
-                        android:textAlignment="center"
-                        android:id="@+id/typesofrelation"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </LinearLayout>
-                <RelativeLayout
+              <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Button

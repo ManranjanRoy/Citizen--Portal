@@ -9,12 +9,18 @@ import com.manoranjan.citizenportal.Api.ApiLinks;
 import com.manoranjan.citizenportal.Response.DocumentListResponse;
 import com.manoranjan.citizenportal.Response.InsertTLResponse;
 import com.manoranjan.citizenportal.Response.PgInvoiceResponse;
+import com.manoranjan.citizenportal.Response.PrintdataResponse;
 import com.manoranjan.citizenportal.Response.ProfileResponse;
+import com.manoranjan.citizenportal.Response.RenewNatureoftradeREsponse;
+import com.manoranjan.citizenportal.Response.RenewOwnerpartnerResponse;
 import com.manoranjan.citizenportal.Response.SignupResponse;
+import com.manoranjan.citizenportal.Response.SingleFollowupGraphResponse;
 import com.manoranjan.citizenportal.Response.SingleMyTadeLicense;
 import com.manoranjan.citizenportal.Response.SingleTradetypeResponse;
 import com.manoranjan.citizenportal.Response.UpdateProfile;
+import com.manoranjan.citizenportal.model.DocTypeListModel;
 import com.manoranjan.citizenportal.model.Example;
+import com.manoranjan.citizenportal.model.FeePaymentModel;
 import com.manoranjan.citizenportal.model.FileUploadModel;
 import com.manoranjan.citizenportal.model.FortheYearModel;
 import com.manoranjan.citizenportal.model.GetprofileModel;
@@ -111,6 +117,11 @@ public interface ApiService {
 
     @Headers("Content-Type: application/json")
     @POST(ApiLinks.insert_mul_json)
+    Call<List<DocTypeListModel>> getdoctypeslist(
+            @Body JsonObject body);
+
+    @Headers("Content-Type: application/json")
+    @POST(ApiLinks.insert_mul_json)
     Call<List<InsertTLResponse>> inserttlform(
             @Body JsonObject body);
 
@@ -118,6 +129,11 @@ public interface ApiService {
     @POST(ApiLinks.insert_mul_json)
     Call<List<PendingPaymentModel>> pendingpayments(
             @Body JsonObject body);
+
+  @Headers("Content-Type: application/json")
+  @POST(ApiLinks.insert_mul_json)
+  Call<List<FeePaymentModel>> feepayments(
+          @Body JsonObject body);
 
     @Headers("Content-Type: application/json")
     @POST(ApiLinks.insert_mul_json)
@@ -133,10 +149,22 @@ public interface ApiService {
     @POST(ApiLinks.insert_mul_json)
     Call<List<MytradeLicenseModel>> getmytradelicense(
             @Body JsonObject body);
+
     @Headers("Content-Type: application/json")
     @POST(ApiLinks.insert_mul_json)
     Call<List<SingleMyTadeLicense>> getsinglemytradelicense(
             @Body JsonObject body);
+
+    @Headers("Content-Type: application/json")
+    @POST(ApiLinks.insert_mul_json)
+    Call<List<RenewOwnerpartnerResponse>> getrenewownerpartner(
+            @Body JsonObject body);
+
+    @Headers("Content-Type: application/json")
+    @POST(ApiLinks.insert_mul_json)
+    Call<List<RenewNatureoftradeREsponse>> getrenewtradetype(
+            @Body JsonObject body);
+
     @Headers("Content-Type: application/json")
     @POST(ApiLinks.insert_mul_json)
     Call<List<SingleTradetypeResponse>> getsinglemytradetypes(
@@ -149,7 +177,22 @@ public interface ApiService {
 
     @Headers("Content-Type: application/json")
     @POST(ApiLinks.insert_mul_json)
+    Call<List<SingleFollowupGraphResponse>> getsinglefollowupdetails(
+            @Body JsonObject body);
+
+    @Headers("Content-Type: application/json")
+    @POST(ApiLinks.insert_mul_json)
     Call<List<NotificatonModel>> notificationlist(
             @Body JsonObject body);
+    @Headers("Content-Type: application/json")
+    @POST(ApiLinks.insert_mul_json)
+    Call<List<NotificatonModel>> forwarddata(
+            @Body JsonObject body);
+
+    @Headers("Content-Type: application/json")
+    @POST(ApiLinks.insert_mul_json)
+    Call<List<PrintdataResponse>> getprintdatafortradedetails(
+            @Body JsonObject body);
+
 
 }

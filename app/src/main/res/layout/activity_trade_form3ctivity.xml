@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </RelativeLayout>
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_below="@id/r1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -53,11 +53,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/roundedcorner"
                 android:orientation="vertical">
-
+<LinearLayout
+    android:visibility="gone"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
                 <LinearLayout
                     android:layout_marginTop="5dp"
                     android:orientation="vertical"
@@ -174,7 +179,13 @@
                         android:layout_height="100dp"
                         tools:ignore="VectorDrawableCompat" />
                 </LinearLayout>
-
+</LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    tools:listitem="@layout/item_doc_select"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/doclist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
                 <RelativeLayout
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
@@ -201,8 +212,9 @@
                         android:textColor="@color/white" />
                 </RelativeLayout>
             </LinearLayout>
+
         </LinearLayout>
     </RelativeLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

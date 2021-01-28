@@ -17,6 +17,26 @@
         android:layout_width="80dp"
         android:layout_height="80dp"/>
     </LinearLayout>
+    <RelativeLayout
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:gravity="center"
+            android:layout_alignParentEnd="true"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/date"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:text="Date: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
         android:layout_marginTop="15dp"
         android:orientation="horizontal"
@@ -96,6 +116,7 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <LinearLayout
+            android:visibility="gone"
             android:weightSum="2"
             android:layout_marginTop="15dp"
             android:orientation="horizontal"
@@ -166,7 +187,7 @@
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:textSize="14dp"
-                android:text="RC/2020-2021/0000001"
+                android:text="remark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -257,8 +278,8 @@
                 android:background="@color/dot_dark_screen1"/>
         <TextView
             android:textColor="@color/black"
-            android:textSize="18dp"
-            android:text="Signature"
+            android:textSize="14dp"
+            android:text="Authorized Officer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         </LinearLayout>

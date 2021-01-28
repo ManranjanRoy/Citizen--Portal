@@ -36,7 +36,7 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(i);
                 finish();
             }
-        }, 5000);
+        }, 3000);
     }
 
     private void  requestMultiplePermissions(){

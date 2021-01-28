@@ -1,5 +1,6 @@
 package com.manoranjan.citizenportal.Activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,14 +13,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -35,6 +40,8 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.JsonObject;
+import com.manoranjan.citizenportal.Adaptor.DocumentsListAdaptor;
+import com.manoranjan.citizenportal.Adaptor.DocumentsListForform4Adaptor;
 import com.manoranjan.citizenportal.Adaptor.OwnerofTradeAdaptor;
 import com.manoranjan.citizenportal.Adaptor.SingleTradeTypesforForm4Adaptor;
 import com.manoranjan.citizenportal.Adaptor.natureofTradeAdaptor;
@@ -44,6 +51,7 @@ import com.manoranjan.citizenportal.Api.StaticData;
 import com.manoranjan.citizenportal.R;
 import com.manoranjan.citizenportal.Response.InsertTLResponse;
 import com.manoranjan.citizenportal.Response.UpdateProfile;
+import com.manoranjan.citizenportal.model.FileListModel;
 import com.manoranjan.citizenportal.model.FileUploadModel;
 import com.manoranjan.citizenportal.model.FilesNamepathListModel;
 import com.manoranjan.citizenportal.model.FortheYearModel;
@@ -54,6 +62,7 @@ import com.manoranjan.citizenportal.model.TypesOfBusinessModel;
 import com.manoranjan.citizenportal.model.TypesOfLandModel;
 import com.manoranjan.citizenportal.model.WardNoModel;
 import com.manoranjan.citizenportal.service.CountryService;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,7 +82,7 @@ String radioyesno="0";
     List<TypesOfLandModel> typesOfLandModelArrayList=new ArrayList<>();
 
     RadioGroup radioGroup;
-    RadioButton radioButton1,radioButton2;
+    RadioButton radioButton1,radioButton2,radioButton3;
 
     String wardnoid="1",typeofrelationid="1";
     String typeoftax="Property Tax";
@@ -83,16 +92,18 @@ String radioyesno="0";
     List<String> natureoftrade=new ArrayList<>();
     private int mYear, mMonth, mDay;
     TextView Dateofcommen;
+    TextInputLayout formnolayout;
+    EditText formno;
     List<TradeNatureModel>  tradeNatureModelList=new ArrayList<>();
     RecyclerView tradetyperecycle,ownerrecycler;
     SingleTradeTypesforForm4Adaptor singleTradeTypesforForm4Adaptor;
     OwnerofTradeAdaptor ownerofTradeAdaptor;
-
+    RecyclerView documentrecycler;
     List<String> typeofbusinesslist=new ArrayList<>();
     List<TypesOfBusinessModel> typesOfBusinessModelarraylist=new ArrayList<>();
     List<String> fortheyearlist=new ArrayList<>();
     List<FortheYearModel> fortheYearModelArrayList=new ArrayList<>();
-    Spinner fortheyearspinner;
+    Spinner cardspinner,applytypespinner,fortheyearspinner;
     String[] cardtypes = {"PAN CARD"};
     TextInputLayout totaldirectorlayout;
     EditText nameofrirm,investmentofcapital,gstin,companypancard,contactnofirst,contactaddress,workshopaddress,godownaddress;
@@ -145,8 +156,12 @@ String radioyesno="0";
         radioGroup=findViewById(R.id.radioGroup);
         radioButton1=findViewById(R.id.radioyes);
         radioButton2=findViewById(R.id.radiono);
+        radioButton3=findViewById(R.id.radionontax);
         businesstype=findViewById(R.id.typeofbusiness);
         tradetype=findViewById(R.id.tradetype);
+        applytypespinner = findViewById(R.id.applytypespinner);
+        formnolayout = findViewById(R.id.formnolayout);
+        formno = findViewById(R.id.formno);
 
         rlayoutforowner = findViewById(R.id.rlayoutforowner);
         rlayoutforpartner = findViewById(R.id.rlayoutforpartner);
@@ -157,7 +172,7 @@ String radioyesno="0";
         contactno = findViewById(R.id.contactno);
         idproofno = findViewById(R.id.idproofno);
 
-
+        cardspinner = findViewById(R.id.idtype);
         fortheyearspinner =findViewById(R.id.fortheyear);
         Dateofcommen=findViewById(R.id.Dateofcommen);
         Dateofcommen.setOnClickListener(new View.OnClickListener() {
@@ -199,31 +214,38 @@ String radioyesno="0";
         singleTradeTypesforForm4Adaptor = new SingleTradeTypesforForm4Adaptor(getApplicationContext(), tradeNatureModelList);
         tradetyperecycle.setAdapter(singleTradeTypesforForm4Adaptor);
 
+        documentrecycler = findViewById(R.id.documentlist);
+        documentrecycler.setHasFixedSize(true);
+        documentrecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
         getward();
         gettypesofrelation();
         gettypeofbusiness();
         getfortheyear();
         getnatureoftrade();
+        getdocuments();
         spinnerdata();
 
         findViewById(R.id.btn_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                filesNamepathListModels.add(new FilesNamepathListModel("RENT AGREEMENT",path1));
-                filesNamepathListModels.add(new FilesNamepathListModel("PROPERTY TAX RECIEPT",path2));
-                filesNamepathListModels.add(new FilesNamepathListModel("FIRE LICENSE",path3));
-                filesNamepathListModels.add(new FilesNamepathListModel("PARTNERSHIP DEED",path4));
-                filesNamepathListModels.add(new FilesNamepathListModel("ASSOCIATION OF MEMORUNDUM",path5));
-
-                List<File> files = new ArrayList<>();
-                List<File> paths=StaticData.files;
-                for (int i = 0; i < paths.size(); i++) {
-                    if (!paths.get(i).equals("")) {
-                        files.add(paths.get(i));
+                if (StaticData.tradeNatureModels.size() > 0) {
+                    //  startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    /*filesNamepathListModels.add(new FilesNamepathListModel("RENT AGREEMENT", path1));
+                    filesNamepathListModels.add(new FilesNamepathListModel("PROPERTY TAX RECIEPT", path2));
+                    filesNamepathListModels.add(new FilesNamepathListModel("FIRE LICENSE", path3));
+                    filesNamepathListModels.add(new FilesNamepathListModel("PARTNERSHIP DEED", path4));
+                    filesNamepathListModels.add(new FilesNamepathListModel("ASSOCIATION OF MEMORUNDUM", path5));
+*/
+                    List<File> files = new ArrayList<>();
+                    List<FileListModel> paths = StaticData.fileslist;
+                    for (int i = 0; i < paths.size(); i++) {
+                        if (!paths.get(i).getFile().equals("")) {
+                            files.add(paths.get(i).getFile());
+                        }
                     }
-                }
-                loadotherdetailsmulti(files);
+                    submitdata();
+                    //loadotherdetailsmulti(files);
                /* List<File> paths=StaticData.files;
                 for (int i = 0; i < paths.size(); i++) {
                     if (!paths.get(i).getPath().equals("")) {
@@ -231,19 +253,76 @@ String radioyesno="0";
                     }
                 }*/
 
-                //submitdata();
+                    //submitdata();
+                    //Log.d("filestest",filesNamepathListModelsnew.toString());
 
-                //Log.d("filestest",filesNamepathListModelsnew.toString());
-
-
+                } else {
+                    Toast.makeText(TradeForm4ctivity.this, "Trade Type is empty", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
     }
 
+    private void getdocuments() {
+        DocumentsListForform4Adaptor documentsListAdaptor = new DocumentsListForform4Adaptor(getApplicationContext(), StaticData.fileslist);
+
+        documentrecycler.setAdapter(documentsListAdaptor);
+        documentsListAdaptor.setonItemClickListner(new DocumentsListForform4Adaptor.OnitemClickListner() {
+            @Override
+            public void onShowClick(int position) {
+                showalert1(position);
+            }
+        });
+    }
+    private void showalert1(final int position) {
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        final AlertDialog dialog = new AlertDialog.Builder(this, R.style.SheetDialog1)
+                .setView(R.layout.item_imagedialog)
+                .create();
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                final ImageView cancel = dialog.findViewById(R.id.cancel);
+                ImageView adsimage = dialog.findViewById(R.id.adsimage);
+                Picasso.with(getApplicationContext())
+                        .load(StaticData.fileslist.get(position).getFile())
+                        .noFade()
+                        .into(adsimage);
+                adsimage.setVisibility(View.VISIBLE);
+                cancel.setVisibility(View.VISIBLE);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    // finish();
+                    dialog.dismiss();
+                }
+                return true;
+            }
+        });
+        dialog.show();
+    }
+
+
     @Override
     protected void onResume() {
         super.onResume();
+        applytypespinner.setEnabled(false);
         wardnospinner.setEnabled(false);
         typesofrelationspinner.setEnabled(false);
         holdingno.setText(StaticData.tholdingno);
@@ -302,7 +381,7 @@ String radioyesno="0";
                 fathersname.setText(StaticData.typeofBusinessListModelList.get(0).getFathername());
                 address.setText(StaticData.typeofBusinessListModelList.get(0).getAddress());
                 contactno.setText(StaticData.typeofBusinessListModelList.get(0).getContactno());
-                idproofno.setText(StaticData.typeofBusinessListModelList.get(0).getIdproof());
+                idproofno.setText(StaticData.typeofBusinessListModelList.get(0).getIdproofno());
             }
 
         }else{
@@ -394,7 +473,6 @@ String radioyesno="0";
                         for (int i=0;i<typesOfLandModelArrayList.size();i++){
                             typesofrelationlist.add(typesOfLandModelArrayList.get(i).getLandNature());
                         }
-
                         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(TradeForm4ctivity.this,
                                 R.layout.my_spinner_style, typesofrelationlist);
                         typesofrelationspinner.setAdapter(dataAdapter);
@@ -419,6 +497,12 @@ String radioyesno="0";
                                 Log.d("testmatchtype", StaticData.typeofrelation + "/" + typesOfLandModelArrayList.get(i).getLandNatureId());
                                 if (StaticData.typeofrelation.trim().equals(typesOfLandModelArrayList.get(i).getLandNatureId().toString())) {
                                     typesofrelationspinner.setSelection(i);
+                                    if (StaticData.tholding_req.equals("Y")){
+                                        radioButton3.setVisibility(View.GONE);
+                                    }else if(StaticData.tholding_req.equals("N")){
+                                        radioButton3.setChecked(true);
+                                        radioButton3.setVisibility(View.VISIBLE);
+                                    }
                                     break;
                                 }
                             }
@@ -437,6 +521,37 @@ String radioyesno="0";
         });
     }
     private void spinnerdata() {
+
+        List<String> allpytype = new ArrayList<String>();
+        allpytype.add("New");
+        allpytype.add("Renew");
+
+        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(TradeForm4ctivity.this,
+                R.layout.my_spinner_style, allpytype);
+        // attaching data adapter to spinner
+        applytypespinner.setAdapter(dataAdapter2);
+        applytypespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+                String item = parent.getItemAtPosition(position).toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        if (StaticData.tapplytype.equals("Renew")) {
+            applytypespinner.setSelection(1);
+            formnolayout.setVisibility(View.VISIBLE);
+            formno.setText(StaticData.regx_no);
+        } else if (StaticData.tapplytype.equals("New")) {
+            applytypespinner.setSelection(0);
+            formnolayout.setVisibility(View.GONE);
+        }
+
         //
         List<String> tradetypes = new ArrayList<String>();
         tradetypes.add("Small");
@@ -460,7 +575,7 @@ String radioyesno="0";
 
             }
         });
-       /* ArrayAdapter ad = new ArrayAdapter(this,R.layout.my_spinner_style,cardtypes);
+        ArrayAdapter ad = new ArrayAdapter(this,R.layout.my_spinner_style,cardtypes);
         ad.setDropDownViewResource(
                 android.R.layout
                         .simple_spinner_dropdown_item);
@@ -473,7 +588,7 @@ String radioyesno="0";
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
-        });*/
+        });
 
     }
     void datepicker(){
@@ -689,7 +804,7 @@ String radioyesno="0";
     public void dismissproggress() {
         progressDialog.dismiss();
     }
-
+//for new insert
     private void loadotherdetailsmulti(List<File> files){
         MultipartBody.Part[] bodys = new MultipartBody.Part[files.size()];
         for(int j=0;j<files.size();j++){
@@ -704,11 +819,12 @@ String radioyesno="0";
                 if (response.isSuccessful() && response.body() != null) {
                     List<FileUploadModel> fileUploadModels=response.body();
                     Log.d("filepath",response.body().get(0).getFilepath());
-                    List<File> paths=StaticData.files;
+                    List<FileListModel> paths=StaticData.fileslist;
                     int j=0;
                     for (int i = 0; i < paths.size(); i++) {
-                        if (!paths.get(i).getPath().equals("")) {
-                        filesNamepathListModelsnew.add(new FilesNamepathListModel(filesNamepathListModels.get(i).getName(),fileUploadModels.get(j).getFilepath()));
+                        if (!paths.get(i).getFile().equals("")) {
+                        filesNamepathListModelsnew.add(
+                                new FilesNamepathListModel(String.valueOf(paths.get(i).getId()),fileUploadModels.get(j).getFilepath()));
                           j=j+1;
                         }
                     }
@@ -717,7 +833,12 @@ String radioyesno="0";
                     if (filesNamepathListModelsnew.size()==0){
                         Toast.makeText(TradeForm4ctivity.this, "no docs", Toast.LENGTH_SHORT).show();
                     }else{
-                        submitdata();
+                        if (StaticData.tapplytype.equals("Renew")) {
+                            submitdataforrenew();
+                        } else if (StaticData.tapplytype.equals("New")) {
+                            submitdata();
+                        }
+
                         //JsonObject obj= RequestData.inserttradeform(filesNamepathListModelsnew);
                     }
                     //StaticData.ffileurl=response.body().get(0).getFilepath();
@@ -731,6 +852,8 @@ String radioyesno="0";
             }
         });
     }
+
+
     public void submitdata(){
         JsonObject obj= RequestData.inserttradeform(filesNamepathListModelsnew);
         //  Showprogess();
@@ -755,5 +878,31 @@ String radioyesno="0";
             }
         });
     }
+//for renew insert
 
+
+    public void submitdataforrenew(){
+        JsonObject obj= RequestData.renewinserttradeform(filesNamepathListModelsnew);
+        //  Showprogess();
+        CountryService countryService=new CountryService();
+        countryService.getAPI().inserttlform(obj).enqueue(new Callback<List<InsertTLResponse>>() {
+            @Override
+            public void onResponse(Call<List<InsertTLResponse>> call, Response<List<InsertTLResponse>> response) {
+                Log.d("response", response.body().toString());
+                dismissproggress();
+                if (response.body()!=null) {
+                    if(response.body().get(0).getCODE()==1){
+                        InsertTLResponse insertTLResponse=response.body().get(0);
+                        StaticData.insertTLResponse=insertTLResponse;
+                        Toast.makeText(TradeForm4ctivity.this, "Sucessfully Inserted", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(),InsertTLFInalPageActivity.class));
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<List<InsertTLResponse>> call, Throwable t) {
+                dismissproggress();
+            }
+        });
+    }
 }

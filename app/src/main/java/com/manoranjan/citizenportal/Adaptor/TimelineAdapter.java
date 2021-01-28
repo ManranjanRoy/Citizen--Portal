@@ -1,11 +1,13 @@
 package com.manoranjan.citizenportal.Adaptor;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.manoranjan.citizenportal.R;
+import com.manoranjan.citizenportal.Response.SingleFollowupGraphResponse;
 import com.manoranjan.citizenportal.model.ListItem;
 import com.repsly.library.timelineview.LineType;
 import com.repsly.library.timelineview.TimelineView;
@@ -18,11 +20,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHolder> {
 
-    private final int orientation;
-    private final List<ListItem> items;
+    private final int orientation=LinearLayoutManager.VERTICAL;
+    private final List<SingleFollowupGraphResponse> items;
+    Context mcontext;
 
-    public TimelineAdapter(int orientation, List<ListItem> items) {
-        this.orientation = orientation;
+    public TimelineAdapter(Context context, List<SingleFollowupGraphResponse> items) {
+        this.mcontext = context;
         this.items = items;
     }
 
@@ -43,28 +46,30 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.tvName.setText(items.get(position).getName());
-        holder.tvAddress.setText(items.get(position).getAddress());
+        SingleFollowupGraphResponse mUploads=items.get(position);
+        holder.tvName.setText(mUploads.getFollowupByUserType());
+        holder.tvAddress.setText(mUploads.getRemarks());
         holder.timelineView.setLineType(getLineType(position));
         holder.timelineView.setNumber(position);
 
-        // Make first and last markers stroked, others filled
 
 
-        if (position <6) {
+        if (position <items.size()-1) {
             holder.timelineView.setDrawable(AppCompatResources
                     .getDrawable(holder.timelineView.getContext(),
                             R.drawable.ic_checked));
         } else {
             holder.timelineView.setDrawable(null);
         }
+
+        // Make first and last markers stroked, others filled
         if (position == 0 || position + 1 == getItemCount()) {
             holder.timelineView.setFillMarker(false);
         } else {
             holder.timelineView.setFillMarker(true);
         }
         // Set every third item active
-        if (position!=0 &&position<7) {
+        if (position!=0 &&position<items.size()-1) {
             holder.timelineView.setActive(true);
         }
     }

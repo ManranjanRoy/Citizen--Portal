@@ -2,6 +2,8 @@ package com.manoranjan.citizenportal.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -25,9 +27,14 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.gson.JsonObject;
+import com.manoranjan.citizenportal.Adaptor.DocstypesListdataAdaptor;
 import com.manoranjan.citizenportal.Api.ApiLinks;
+import com.manoranjan.citizenportal.Api.RequestData;
 import com.manoranjan.citizenportal.Api.StaticData;
 import com.manoranjan.citizenportal.R;
+import com.manoranjan.citizenportal.model.DocTypeListModel;
+import com.manoranjan.citizenportal.model.FileListModel;
 import com.manoranjan.citizenportal.model.FileUploadModel;
 import com.manoranjan.citizenportal.model.FilesNamepathListModel;
 import com.manoranjan.citizenportal.service.CountryService;
@@ -52,7 +59,12 @@ public class TradeForm3ctivity extends AppCompatActivity implements View.OnClick
     BottomSheetDialog dialog;
     CoordinatorLayout coordinatorLayout;
     ProgressDialog progressDialog;
-
+    DocstypesListdataAdaptor docstypesListdataAdaptor;
+    RecyclerView doclistrecycler;
+    int pos;
+    View itemview;
+    List<DocTypeListModel> docTypeListModelList=new ArrayList<>();
+    List<FileListModel> fileListModelList=new ArrayList<>();
     int imgno;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +74,12 @@ public class TradeForm3ctivity extends AppCompatActivity implements View.OnClick
         progressDialog.setMessage("Please Wait...");
         progressDialog.setCancelable(false);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
+
+        doclistrecycler = findViewById(R.id.doclist);
+        doclistrecycler.setHasFixedSize(true);
+        doclistrecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+
          icon = BitmapFactory.decodeResource(getResources(),
                 R.drawable.ic_baseline_cloud_upload_24);
          StaticData.bitmap1=icon;
@@ -77,7 +95,7 @@ public class TradeForm3ctivity extends AppCompatActivity implements View.OnClick
         img4 = findViewById(R.id.img4);
         img5 = findViewById(R.id.img5);
         init_modal_bottomsheet();
-        img1.setOnClickListener(new View.OnClickListener() {
+    /*    img1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -114,6 +132,8 @@ public class TradeForm3ctivity extends AppCompatActivity implements View.OnClick
                 dialog.show();
             }
         });
+*/
+        loaddocstypes();
         findViewById(R.id.btn_skip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,8 +143,7 @@ public class TradeForm3ctivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.btn_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                    List<String> paths = new ArrayList<>();
+                   /* List<String> paths = new ArrayList<>();
                     paths.add(path1);
                     paths.add(path2);
                     paths.add(path3);
@@ -143,14 +162,23 @@ public class TradeForm3ctivity extends AppCompatActivity implements View.OnClick
                        //loadotherdetailsmulti(files);
                     }else{
                          Toast.makeText(TradeForm3ctivity.this, "Select Any one Document", Toast.LENGTH_SHORT).show();
-                     }
-
-
+                     }*/
+                   Log.d("docdata", String.valueOf(fileListModelList.size()));
+                StaticData.fileslist=fileListModelList;
+                if (fileListModelList.size() >= 1) {
+                    startActivity(new Intent(getApplicationContext(),TradeForm4ctivity.class));
+                    //loadotherdetailsmulti(files);
+                }else{
+                    Toast.makeText(TradeForm3ctivity.this, "Select Any one Document", Toast.LENGTH_SHORT).show();
+                }
+                //Toast.makeText(TradeForm3ctivity.this, fileListModelList.toString(), Toast.LENGTH_SHORT).show();
             }
         });
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("docdata", String.valueOf(fileListModelList.size()));
+                StaticData.fileslist=fileListModelList;
                 finish();
                 // startActivity(new Intent(getApplicationContext(),Login.class));
             }
@@ -216,25 +244,19 @@ public class TradeForm3ctivity extends AppCompatActivity implements View.OnClick
             }
         });
     }
-
-public Bitmap getbitmap(Uri uri){
-        Bitmap bitmap = null;
-    try {
-         bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    return bitmap;
-}
     @Override
     protected void onResume() {
         super.onResume();
-        path1=StaticData.path1;
+       /* path1=StaticData.path1;
         path2=StaticData.path2;
         path3=StaticData.path3;
         path4=StaticData.path4;
-        path5=StaticData.path5;
+        path5=StaticData.path5;*/
 
+        if (StaticData.fileslist!=null && StaticData.fileslist.size()>0){
+         docstypesListdataAdaptor.notifyDataSetChanged();
+        }
+/*
         if (!StaticData.path1.isEmpty()){
             img1.setImageBitmap(StaticData.bitmap1);
         }
@@ -249,7 +271,7 @@ public Bitmap getbitmap(Uri uri){
         }
         if (!StaticData.path5.isEmpty()){
             img5.setImageBitmap(StaticData.bitmap5);
-        }
+        }*/
     }
 
     @Override
@@ -300,6 +322,15 @@ public Bitmap getbitmap(Uri uri){
                         bitmap5=bitmap;
                         StaticData.path5=path5;
                         StaticData.bitmap5=bitmap5;
+                    }else if (imgno==11){
+                       // Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+                        StaticData.uri5=contentURI;
+                        path5 = contentURI.getLastPathSegment();
+                        bitmap5=bitmap;
+                        StaticData.path5=path5;
+                        StaticData.bitmap5=bitmap5;
+                        showimg();
+
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -347,9 +378,41 @@ public Bitmap getbitmap(Uri uri){
                 bitmap5=bitmap;
                 StaticData.path5=path5;
                 StaticData.bitmap5=bitmap5;
+            }else if (imgno==11){
+                StaticData.uri5=Uri.parse(getFileDataFromDrawable(bitmap).toString());
+                path5 =  saveImage(bitmap);
+                bitmap5=bitmap;
+                StaticData.path5=path5;
+                StaticData.bitmap5=bitmap5;
+                showimg();
+
             }
         }
 
+    }
+
+    public void showimg(){
+        ImageView img=itemview.findViewById(R.id.img1);
+        img.setImageBitmap(StaticData.bitmap5);
+        if (docTypeListModelList.size()>0){
+            if (!path5.equals("")) {
+                if (fileListModelList.size()>0){
+                    int a=0;
+                    for (int i=0;i<fileListModelList.size();i++){
+                        if (docTypeListModelList.get(pos).getDocumentId()==fileListModelList.get(i).getId()){
+                            a=1;
+                            fileListModelList.set(i,new FileListModel(docTypeListModelList.get(pos).getDocumentId(), docTypeListModelList.get(pos).getDocumentName(),new File(path5)));
+                            break;
+                        }
+                    }
+                    if (a==0) {
+                        fileListModelList.add(new FileListModel(docTypeListModelList.get(pos).getDocumentId(),  docTypeListModelList.get(pos).getDocumentName(),new File(path5)));
+                    }
+                }else{
+                    fileListModelList.add(new FileListModel(docTypeListModelList.get(pos).getDocumentId(), docTypeListModelList.get(pos).getDocumentName(), new File(path5)));
+                }
+            }
+        }
     }
     public String saveImage(Bitmap myBitmap) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -405,6 +468,48 @@ public Bitmap getbitmap(Uri uri){
             }
             @Override
             public void onFailure(Call<List<FileUploadModel>> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),"Server Error"+t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void loaddocstypes(){
+        String formtype="N";
+        if (StaticData.tapplytype.equals("New")){
+            formtype="N";
+        }else{
+            formtype="R";
+        }
+
+        JsonObject obj = RequestData.getdocumentlist(formtype);
+        progressDialog.show();
+        new CountryService().getAPI().getdoctypeslist(obj).enqueue(new Callback<List<DocTypeListModel>>() {
+            @Override
+            public void onResponse(Call<List<DocTypeListModel>> call, retrofit2.Response<List<DocTypeListModel>> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful() && response.body() != null) {
+                    docTypeListModelList=response.body();
+
+                    docstypesListdataAdaptor=new DocstypesListdataAdaptor(getApplicationContext(),docTypeListModelList);
+                    doclistrecycler.setAdapter(docstypesListdataAdaptor);
+
+                    docstypesListdataAdaptor.setonItemClickListner(new DocstypesListdataAdaptor.OnitemClickListner() {
+                        @Override
+                        public void onShowClick(int position,View item) {
+
+                            ImageView img=item.findViewById(R.id.img1);
+                           // img.setImageBitmap(StaticData.bitmap5);
+                            pos=position;
+                            itemview=item;
+                            imgno=11;
+                            dialog.show();
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onFailure(Call<List<DocTypeListModel>> call, Throwable t) {
                 progressDialog.dismiss();
                 Toast.makeText(getApplicationContext(),"Server Error"+t.getMessage(),Toast.LENGTH_LONG).show();
             }

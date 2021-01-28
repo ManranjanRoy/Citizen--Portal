@@ -141,7 +141,6 @@ public class SingleMyTadeLicenseActivity extends AppCompatActivity {
                 progresslayout.setVisibility(View.GONE);
                 if (response.body() != null) {
                     if (response.body().size() > 0) {
-                        Toast.makeText(SingleMyTadeLicenseActivity.this, "error 1", Toast.LENGTH_SHORT).show();
                         singleMyTadeLicense = response.body().get(0);
                         getmytradetypes(String.valueOf(singleMyTadeLicense.getAppTLID()));
                         showdata();
@@ -277,6 +276,9 @@ public class SingleMyTadeLicenseActivity extends AppCompatActivity {
         switch (id){
             case R.id.graph:
                startActivity(new Intent(getApplicationContext(),FollowUpGraphActivity.class));
+                return true;
+            case R.id.print:
+                startActivity(new Intent(getApplicationContext(),PrintFeeActivity.class));
                 return true;
 
             default:

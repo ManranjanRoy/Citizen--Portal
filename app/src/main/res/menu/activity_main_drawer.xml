@@ -21,6 +21,11 @@
                android:id="@+id/nav_my_trade_license"
                android:icon="@drawable/ic_payment_black_24dp"
                android:title="My Trade License" />
+
+        <item
+            android:id="@+id/nav_feepayment"
+            android:icon="@drawable/ic_payment_black_24dp"
+            android:title="Trade Fee Payment" />
         <!--   <item
 
              android:id="@+id/nav_cart"

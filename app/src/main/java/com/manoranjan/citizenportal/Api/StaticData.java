@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 
 import com.manoranjan.citizenportal.Response.InsertTLResponse;
+import com.manoranjan.citizenportal.model.FileListModel;
 import com.manoranjan.citizenportal.model.FilesNamepathListModel;
 import com.manoranjan.citizenportal.model.NatureoftradeModel;
 import com.manoranjan.citizenportal.model.Profile;
@@ -27,12 +28,14 @@ public class StaticData {
     public static String fcardtype="PAN CARD",fcardnumber,ffileurl;
     public static  boolean prevstat=false;
 
-    public static String tholdingno,townername,tstreetaddress,tlocality,twardno="1",ttypeoftax="Property Tax",tammountoftax,typeofrelation="1";
+    public static String tapplytype="New",tholdingno,tholding_req="Y",townername,tstreetaddress,tlocality,twardno="1",ttypeoftax="Property Tax",tammountoftax,
+            typeofrelation="1";
     public static String ttypeofbusinessid="1",tfortheyearid="1",tnameoffirm,tdateofcommenence,tinvestmentcapital,
             ttradetype="Small",tgstin,tcompanypancard,tcontactnofirst,tcontactaddress,tworkshopaddress,tgodownaddress;
    public static List<TradeNatureModel> tradeNatureModels=null;
     public static List<TypeofBusinessListModel> typeofBusinessListModelList=null;
     public static List<File> files=null;
+    public static List<FileListModel> fileslist=null;
     public static List<FilesNamepathListModel> finalfilesNamepathListModelList=null;
     public static Uri uri1,uri2,uri3,uri4,uri5;
     public static String path1="",path2="",path3="",path4="",path5="";
@@ -40,6 +43,8 @@ public class StaticData {
 
     public static  InsertTLResponse insertTLResponse=null;
 //forsingletradedetails
-    public static String form_id="0";
+    public static String form_id="Form No";
+    public static String regx_no="Regx id";
+    public static String tl_id="1 id";
 
 }

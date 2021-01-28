@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.manoranjan.citizenportal.R;
@@ -22,7 +23,7 @@ public class NotificationListAdaptor extends RecyclerView.Adapter<NotificationLi
     private OnitemClickListner mlistner;
 
     public interface OnitemClickListner {
-        void onPayClick(int position);
+        void onForwardClick(int position);
     }
 
     public void setonItemClickListner(OnitemClickListner listner) {
@@ -47,22 +48,26 @@ public class NotificationListAdaptor extends RecyclerView.Adapter<NotificationLi
         final NotificatonModel uploadCurrent = mUploads.get(position);
 
         holder.title.setText(uploadCurrent.getFormNo());
-        holder.date.setText(uploadCurrent.getAppliedOn());
-        holder.desc.setText(uploadCurrent.getNameOrg());
-        //holder.wardno.setText(uploadCurrent.getWardNo());
+        holder.desc.setText(uploadCurrent.getRemarks());
+        holder.date.setText(uploadCurrent.getFollowup_Date());
+        if (uploadCurrent.getFollowup_By_User_ID().equals("0")){
+            holder.forward.setVisibility(View.GONE);
+        }else{
+            holder.forward.setVisibility(View.VISIBLE);
+        }
 
-       /* holder.delete.setOnClickListener(new View.OnClickListener() {
+        /* holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                   *//*Intent i=new Intent(mContext, DoctorlistActivity.class);
+                   Intent i=new Intent(mContext, DoctorlistActivity.class);
                     i.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK);
                     //i.putExtra("url",uploadCurrent.getId());
                     //Toast.makeText(mContext,uploadCurrent.getId(),Toast.LENGTH_SHORT).show();
                     StaticData.hospital_id=uploadCurrent.getId();
-                    mContext.startActivity(i);*//*
+                    mContext.startActivity(i);
             }
-        });
-*/
+        });*/
+
     }
 
     @Override
@@ -73,6 +78,7 @@ public class NotificationListAdaptor extends RecyclerView.Adapter<NotificationLi
     public class ImageViewHolder extends RecyclerView.ViewHolder {
         TextView title, desc, date;
         ImageView icon;
+        LinearLayout forward;
 
         public ImageViewHolder(View itemView, final OnitemClickListner listner) {
             super(itemView);
@@ -80,7 +86,18 @@ public class NotificationListAdaptor extends RecyclerView.Adapter<NotificationLi
             desc = itemView.findViewById(R.id.ndesc);
             date = itemView.findViewById(R.id.date);
             icon = itemView.findViewById(R.id.icon);
-
+            forward=itemView.findViewById(R.id.forward);
+            forward.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listner != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listner.onForwardClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }

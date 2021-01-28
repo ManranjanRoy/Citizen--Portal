@@ -199,7 +199,7 @@ public class Login extends AppCompatActivity  implements LoginView {
                                         //Adding values to editor
                                         editor.putBoolean(Configss.LOGGEDIN_SHARED_PREF, true);
                                         editor.putBoolean(Configss.Profile_status, false);
-                                        editor.putString(Configss.login_role, "0");
+                                        editor.putString(Configss.name, response.body().get(0).getName());
                                         editor.putString(Configss.tokencode, response.body().get(0).getEmail());
                                         editor.putString(Configss.citizen_id, String.valueOf(response.body().get(0).getECityzenID()));
                                         editor.commit();

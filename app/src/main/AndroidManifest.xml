@@ -11,8 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.NotificationActivity" android:label="Notifications"
+        <activity android:name=".Activity.FeepaymentActivity"
+            android:label="Trade Fee Payment"
             android:parentActivityName=".Activity.MainActivity"></activity>
+        <activity
+            android:name=".Activity.PrintFeeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.NotificationActivity"
+            android:label="Notifications"
+            android:parentActivityName=".Activity.MainActivity" />
         <activity
             android:name=".Activity.FollowUpGraphActivity"
             android:label="FollowUp Status"
@@ -95,9 +103,9 @@
             android:name="com.razorpay.ApiKey"
             android:value="rzp_test_BOZdKdWNHZRUkb" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

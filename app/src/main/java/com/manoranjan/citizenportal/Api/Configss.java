@@ -19,7 +19,7 @@ public class Configss {
 
     public  static  final String notisize="0";
     public  static  final String citizen_id="fh";
-    public  static  final String mobileno="hyjty";
+    public  static  final String name="name";
     public  static  final String login_role="0";
 
 

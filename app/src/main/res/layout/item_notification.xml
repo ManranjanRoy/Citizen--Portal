@@ -6,11 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
-        android:paddingVertical="10dp"
+        android:paddingVertical="5dp"
         android:paddingHorizontal="20dp"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="75dp">
         <LinearLayout
+            android:gravity="center_vertical"
             android:id="@+id/l1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
@@ -22,6 +23,7 @@
             android:src="@drawable/logo_haldia"/>
         </LinearLayout>
         <LinearLayout
+            android:gravity="center_vertical"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:layout_marginRight="55dp"
@@ -54,6 +56,29 @@
                 android:textSize="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/forward"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="2dp"
+            android:paddingHorizontal="5dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp">
+            <TextView
+                android:layout_marginTop="3dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:text="Forward"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+            <ImageView
+                android:src="@drawable/ic_arrow_forward_black_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
         </LinearLayout>
     </RelativeLayout>
     <View

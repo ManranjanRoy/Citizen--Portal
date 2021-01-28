@@ -18,11 +18,13 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
+import com.manoranjan.citizenportal.Adaptor.FeePaymentListAdaptor;
 import com.manoranjan.citizenportal.Adaptor.PendingPaymentListAdaptor;
 import com.manoranjan.citizenportal.Api.RequestData;
 import com.manoranjan.citizenportal.Api.StaticData;
 import com.manoranjan.citizenportal.R;
 import com.manoranjan.citizenportal.Response.PgInvoiceResponse;
+import com.manoranjan.citizenportal.model.FeePaymentModel;
 import com.manoranjan.citizenportal.model.PendingPaymentModel;
 import com.manoranjan.citizenportal.service.CountryService;
 import com.razorpay.Checkout;
@@ -34,11 +36,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PendingpaymentActivity extends AppCompatActivity implements PaymentResultListener {
+public class FeepaymentActivity extends AppCompatActivity implements PaymentResultListener {
     RecyclerView pendinglistrecycler;
     ImageView nodatafound;
-    PendingPaymentListAdaptor pendingPaymentListAdaptor;
-    List<PendingPaymentModel> pendingPaymentModelList=new ArrayList<>();
+    FeePaymentListAdaptor feePaymentListAdaptor;
+    List<FeePaymentModel> feePaymentModels=new ArrayList<>();
     ProgressDialog progressDialog;
     LinearLayout progresslayout;
     String pg_invoice_id="0";
@@ -46,8 +48,8 @@ public class PendingpaymentActivity extends AppCompatActivity implements Payment
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pendingpayment);
-        progressDialog = new ProgressDialog(PendingpaymentActivity.this);
+        setContentView(R.layout.activity_feepayment);
+        progressDialog = new ProgressDialog(FeepaymentActivity.this);
         progressDialog.setMessage("Please Wait...");
         progressDialog.setCancelable(false);
         nodatafound=findViewById(R.id.nodatfoundimg);
@@ -56,6 +58,7 @@ public class PendingpaymentActivity extends AppCompatActivity implements Payment
         pendinglistrecycler.setHasFixedSize(true);
         pendinglistrecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
+
         getpendingpayment();
 
        /* if (pendingPaymentModelList.size() > 0) {
@@ -63,41 +66,40 @@ public class PendingpaymentActivity extends AppCompatActivity implements Payment
         } else {
             nodatafound.setVisibility(View.VISIBLE);
         }*/
-
     }
 
     public void getpendingpayment() {
-        JsonObject obj = RequestData.getpendingpayment();
+        JsonObject obj = RequestData.getfeepayment();
         progresslayout.setVisibility(View.VISIBLE);
         CountryService countryService = new CountryService();
-        countryService.getAPI().pendingpayments(obj).enqueue(new Callback<List<PendingPaymentModel>>() {
+        countryService.getAPI().feepayments(obj).enqueue(new Callback<List<FeePaymentModel>>() {
             @Override
-            public void onResponse(Call<List<PendingPaymentModel>> call, Response<List<PendingPaymentModel>> response) {
+            public void onResponse(Call<List<FeePaymentModel>> call, Response<List<FeePaymentModel>> response) {
                 Log.d("response", response.body().toString());
                 progresslayout.setVisibility(View.GONE);
                 if (response.body() != null) {
                     if (response.body().size() > 0) {
                         nodatafound.setVisibility(View.GONE);
-                        pendingPaymentModelList=response.body();
-                       // any implementation
-                        Collections.reverse(pendingPaymentModelList);
-                        pendingPaymentListAdaptor=new PendingPaymentListAdaptor(getApplicationContext(),pendingPaymentModelList);
-                        pendinglistrecycler.setAdapter(pendingPaymentListAdaptor);
-                        pendingPaymentListAdaptor.setonItemClickListner(new PendingPaymentListAdaptor.OnitemClickListner() {
+                        feePaymentModels=response.body();
+                        // any implementation
+                        Collections.reverse(feePaymentModels);
+                        feePaymentListAdaptor=new FeePaymentListAdaptor(getApplicationContext(),feePaymentModels);
+                        pendinglistrecycler.setAdapter(feePaymentListAdaptor);
+                        feePaymentListAdaptor.setonItemClickListner(new FeePaymentListAdaptor.OnitemClickListner() {
                             @Override
                             public void onPayClick(int position) {
-                                TL_Form_Id=pendingPaymentModelList.get(position).getTL_Form_Id();
-                                getpginvoice(TL_Form_Id);
+                                TL_Form_Id=feePaymentModels.get(position).getTL_Form_Id();
+                                //getpginvoice(TL_Form_Id);
                             }
                         });
-                        }
+                    }
                     else {
                         nodatafound.setVisibility(View.VISIBLE);
                     }
                 }
             }
             @Override
-            public void onFailure(Call<List<PendingPaymentModel>> call, Throwable t) {
+            public void onFailure(Call<List<FeePaymentModel>> call, Throwable t) {
                 progresslayout.setVisibility(View.GONE);
                 getpendingpayment();
             }
@@ -159,11 +161,11 @@ public class PendingpaymentActivity extends AppCompatActivity implements Payment
                 progresslayout.setVisibility(View.GONE);
                 if (response.body() != null) {
                     if (response.body().size() > 0) {
-                         pg_invoice_id=response.body().get(0).getPG_Invoice_ID();
-                       startPayment(pg_invoice_id);
+                        pg_invoice_id=response.body().get(0).getPG_Invoice_ID();
+                        startPayment(pg_invoice_id);
                     }
                     else {
-                        Toast.makeText(PendingpaymentActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Server Error", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -191,7 +193,7 @@ public class PendingpaymentActivity extends AppCompatActivity implements Payment
                         startActivity(i);
                     }
                     else {
-                        Toast.makeText(PendingpaymentActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Server Error", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

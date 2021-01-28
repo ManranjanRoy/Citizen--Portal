@@ -89,7 +89,6 @@ public class RequestData {
         }
         return obj;
     }
-
     public static JsonObject updateprofile() {
         JsonObject obj = new JsonObject();
         final JSONObject paramObject = new JSONObject();
@@ -184,6 +183,21 @@ public class RequestData {
         try {
             jsonObject.put("flag", "getTradeType");
             jsonObject.put("spname", "USP_TRADE_APPLICATION");
+            Log.d("jsondata", jsonObject.toString());
+            JsonParser jsonParser = new JsonParser();
+            obj = (JsonObject) jsonParser.parse(jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+    public static JsonObject getdocumentlist(String yesorno) {
+        JsonObject obj = new JsonObject();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("flag", "getDoctypes");
+            jsonObject.put("spname", "USP_TRADE_APPLICATION");
+            jsonObject.put("TL_Type", yesorno);
             Log.d("jsondata", jsonObject.toString());
             JsonParser jsonParser = new JsonParser();
             obj = (JsonObject) jsonParser.parse(jsonObject.toString());
@@ -292,8 +306,11 @@ public class RequestData {
             for(int i=0;i<filesNamepathListModelsnew.size();i++) {
                 final JSONObject jsonTlAppDocs = new JSONObject();
                 FilesNamepathListModel filesNamepathListModel = filesNamepathListModelsnew.get(i);
-                jsonTlAppDocs.put("Document_name", filesNamepathListModel.getName());
+                jsonTlAppDocs.put("Document_Id", filesNamepathListModel.getName());
                 jsonTlAppDocs.put("Doc_path", filesNamepathListModel.getPath());
+                jsonTlAppDocs.put("Remarks", "N");
+                jsonTlAppDocs.put("Is_Required", "N");
+                jsonTlAppDocs.put("Re_Upload", "N");
                 jsonTlAppDocsarray.put(jsonTlAppDocs);
             }
         }else{
@@ -320,7 +337,125 @@ public class RequestData {
         }
         return obj;
     }
+
+    public static JsonObject renewinserttradeform(List<FilesNamepathListModel> filesNamepathListModelsnew) {
+        JsonObject obj = new JsonObject();
+
+        final JSONObject jsonTLAppForm=new JSONObject();
+        final JSONObject jsonTLAppFollowupEmp=new JSONObject();
+        try {
+            //
+            jsonTLAppForm.put("TL_Form_Id",1);
+            jsonTLAppForm.put("TL_ID",StaticData.tl_id);
+            jsonTLAppForm.put("Form_No",null);
+            jsonTLAppForm.put("Fin_Year_ID",StaticData.tfortheyearid);
+            jsonTLAppForm.put("TL_Type","N");
+            jsonTLAppForm.put("Ward_ID",StaticData.twardno);
+            jsonTLAppForm.put("Street",StaticData.tstreetaddress);
+            jsonTLAppForm.put("Holding_No",StaticData.tholdingno);
+            jsonTLAppForm.put("Tax_Status",null);
+            jsonTLAppForm.put("Land_Nature_Id",StaticData.typeofrelation);//typesofland
+            jsonTLAppForm.put("Applied_On",StaticData.tdateofcommenence);
+            jsonTLAppForm.put("Status","1");
+
+            jsonTLAppFollowupEmp.put("Followup_Id",1);
+            jsonTLAppFollowupEmp.put("TL_Form_Id",0);
+            jsonTLAppFollowupEmp.put("Form_Status","PAYMENT PENDING");
+            jsonTLAppFollowupEmp.put("Followup_Date",null);
+            jsonTLAppFollowupEmp.put("Sent_To_Date",null);
+            jsonTLAppFollowupEmp.put("Remarks","PAYMENT PENDING");
+            jsonTLAppFollowupEmp.put("Followup_By_E_Cityzen_ID",StaticData.citizen_id);
+            jsonTLAppFollowupEmp.put("Followup_By_User_ID",0);
+            jsonTLAppFollowupEmp.put("Followup_By_User_Type","Cityzen");
+            jsonTLAppFollowupEmp.put("Next_Followup_E_Cityzen_ID",StaticData.citizen_id);//typesofland
+            jsonTLAppFollowupEmp.put("Next_Followup_User_ID",0);
+            jsonTLAppFollowupEmp.put("Next_Followup_User_Type","Cityzen");
+            jsonTLAppForm.put("Is_Used","N");
+
+            JSONArray jsonArrayfortradenaturetype = new JSONArray();
+            if (StaticData.tradeNatureModels.size()>0) {
+                for (int i = 0; i < StaticData.tradeNatureModels.size(); i++) {
+                    final JSONObject jsonTLAppTradeType = new JSONObject();
+                    TradeNatureModel tradeNatureModel = StaticData.tradeNatureModels.get(i);
+                    jsonTLAppTradeType.put("Txn_Id", 1);
+                    jsonTLAppTradeType.put("TL_ID", StaticData.tl_id);
+                    jsonTLAppTradeType.put("Trade_id", tradeNatureModel.getName());
+                    jsonTLAppTradeType.put("Trade_Size", tradeNatureModel.getType());
+                    jsonArrayfortradenaturetype.put(jsonTLAppTradeType);
+                }
+            }else{
+                Log.d("jsondatainsert","no datanature");
+
+            }
+            JSONArray jsonTLAppOwnerarray = new JSONArray();
+            if (StaticData.typeofBusinessListModelList.size()>0) {
+                for(int i=0;i<StaticData.typeofBusinessListModelList.size();i++){
+                    final  JSONObject jsonTLAppOwner=new JSONObject();
+                    TypeofBusinessListModel typeofBusinessListModel=StaticData.typeofBusinessListModelList.get(i);
+                    jsonTLAppOwner.put("Owner_Partner_Id",1);
+                    jsonTLAppOwner.put("TL_ID",1);
+                    jsonTLAppOwner.put("Owner_Name",typeofBusinessListModel.getName());
+                    jsonTLAppOwner.put("Pan",typeofBusinessListModel.getIdproofno());
+                    jsonTLAppOwner.put("Contact_Mob",typeofBusinessListModel.getContactno());
+                    jsonTLAppOwner.put("So_Do_Wo",typeofBusinessListModel.getFathername());
+                    jsonTLAppOwner.put("Address",typeofBusinessListModel.getAddress());
+                    jsonTLAppOwnerarray.put(jsonTLAppOwner);
+                }
+            }else{
+                Log.d("jsondatainsert","no dataowner");
+
+            }
+            JSONArray jsonTlAppDocsarray = new JSONArray();
+            if (filesNamepathListModelsnew.size()>0) {
+                for(int i=0;i<filesNamepathListModelsnew.size();i++) {
+                    final JSONObject jsonTlAppDocs = new JSONObject();
+                    FilesNamepathListModel filesNamepathListModel = filesNamepathListModelsnew.get(i);
+                    jsonTlAppDocs.put("Document_name", filesNamepathListModel.getName());
+                    jsonTlAppDocs.put("Doc_path", filesNamepathListModel.getPath());
+                    jsonTlAppDocsarray.put(jsonTlAppDocs);
+                }
+            }else{
+                Log.d("jsondatainsert","no datadoc");
+
+            }
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("flag", "insertTL_CityzenRenew");
+            jsonObject.put("spname", "USP_TRADE_APPLICATION");
+            jsonObject.put("TL_ID", StaticData.tl_id);//tl_id
+            jsonObject.put("jsonTLAppForm", jsonTLAppForm);
+            jsonObject.put("jsonTLAppTradeType", jsonArrayfortradenaturetype);
+            jsonObject.put("jsonTLAppOwner", jsonTLAppOwnerarray);
+            jsonObject.put("jsonTLAppFollowupEmp", jsonTLAppFollowupEmp);
+            jsonObject.put("jsonTlAppDocs", jsonTlAppDocsarray);
+
+            Log.d("jsondatarenew", jsonObject.toString());
+
+            JsonParser jsonParser = new JsonParser();
+            obj = (JsonObject) jsonParser.parse(jsonObject.toString());
+        } catch (JSONException e) {
+            Log.d("jsondatainsert", e.toString());
+            e.printStackTrace();
+        }
+        return obj;
+    }
+
     public static JsonObject getpendingpayment() {
+        JsonObject obj = new JsonObject();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("flag", "Payment_Pending_Form");
+            jsonObject.put("spname", "USP_TRADE_APPLICATION");
+            jsonObject.put("E_Cityzen_ID", StaticData.citizen_id);
+            Log.d("jsondata", jsonObject.toString());
+            JsonParser jsonParser = new JsonParser();
+            obj = (JsonObject) jsonParser.parse(jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+
+    public static JsonObject getfeepayment() {
         JsonObject obj = new JsonObject();
         JSONObject jsonObject = new JSONObject();
         try {
@@ -432,11 +567,26 @@ public class RequestData {
         }
         return obj;
     }
+    public static JsonObject getsinglefollwupchart() {
+        JsonObject obj = new JsonObject();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("flag", "get_application_followup_Cityzen");
+            jsonObject.put("spname", "USP_TRADE_APPLICATION");
+            jsonObject.put("Form_No", StaticData.form_id);
+            Log.d("jsondata", jsonObject.toString());
+            JsonParser jsonParser = new JsonParser();
+            obj = (JsonObject) jsonParser.parse(jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
     public static JsonObject getnotificationlist() {
         JsonObject obj = new JsonObject();
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("flag", "Payment_Pending_Form");
+            jsonObject.put("flag", "Remarks_Cityzen");
             jsonObject.put("spname", "USP_TRADE_APPLICATION");
             jsonObject.put("E_Cityzen_ID", StaticData.citizen_id);
             Log.d("jsondata", jsonObject.toString());
@@ -447,4 +597,95 @@ public class RequestData {
         }
         return obj;
     }
+
+    public static JsonObject getrenewmytradelicense() {
+        JsonObject obj = new JsonObject();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("flag", "getTradeDetailsRenewSelect");
+            jsonObject.put("spname", "USP_TRADE_APPLICATION_EMP");
+            jsonObject.put("regn_118", StaticData.regx_no);
+           // jsonObject.put("E_Cityzen_ID", StaticData.citizen_id);
+            Log.d("jsondata", jsonObject.toString());
+            JsonParser jsonParser = new JsonParser();
+            obj = (JsonObject) jsonParser.parse(jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+    public static JsonObject getRenewSelect_Owner_Partner() {
+        JsonObject obj = new JsonObject();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("flag", "getTDRenewSelect_Owner_Partner");
+            jsonObject.put("spname", "USP_TRADE_APPLICATION_EMP");
+            jsonObject.put("regn_118", StaticData.regx_no);
+            // jsonObject.put("E_Cityzen_ID", StaticData.citizen_id);
+            Log.d("jsondata", jsonObject.toString());
+            JsonParser jsonParser = new JsonParser();
+            obj = (JsonObject) jsonParser.parse(jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+    public static JsonObject getRenewSelect_tradetype() {
+        JsonObject obj = new JsonObject();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("flag", "getTDRenewSelect_Nature_Of_Trade");
+            jsonObject.put("spname", "USP_TRADE_APPLICATION_EMP_PART2");
+            jsonObject.put("regn_118", StaticData.regx_no);
+            // jsonObject.put("E_Cityzen_ID", StaticData.citizen_id);
+            Log.d("jsondata", jsonObject.toString());
+            JsonParser jsonParser = new JsonParser();
+            obj = (JsonObject) jsonParser.parse(jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+    public static JsonObject getfarwarddata(String tl_form_id, String followup_by_user_id) {
+        int status=0;
+        if (followup_by_user_id.equals("6")){
+            status=16;
+        }else if (followup_by_user_id.equals("8")){
+            status=17;
+        }else if (followup_by_user_id.equals("9")){
+            status=18;
+        }
+        JsonObject obj = new JsonObject();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("flag", "Insert_Update_Followup_cityzen");
+            jsonObject.put("spname", "USP_TRADE_APPLICATION");
+            jsonObject.put("TL_Form_Id",tl_form_id);
+            jsonObject.put("E_Cityzen_ID", StaticData.citizen_id);
+            jsonObject.put("Next_User_Id",followup_by_user_id);
+            jsonObject.put("Status_Id",status);
+            Log.d("jsondata", jsonObject.toString());
+            JsonParser jsonParser = new JsonParser();
+            obj = (JsonObject) jsonParser.parse(jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+    public static JsonObject getprintdatafortradelicense() {
+        JsonObject obj = new JsonObject();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("flag", "get_PrintReceived");
+            jsonObject.put("spname", "USP_TRADE_APPLICATION");
+            jsonObject.put("Form_No", StaticData.form_id);
+            Log.d("jsondata", jsonObject.toString());
+            JsonParser jsonParser = new JsonParser();
+            obj = (JsonObject) jsonParser.parse(jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+
 }
